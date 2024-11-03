@@ -70,14 +70,13 @@ Here are the steps to serve the [`meta-llama/Llama-3.2-11B-Vision-Instruct`](htt
     ```{.bashrc}
     curl -N 127.0.0.1:8080/generate \
          -X POST \
-         -d '{"inputs":"![](https://tinyurl.com/48eathrw) What is this a picture of? Explain in detail.\n\n",\
-             "parameters":        {"max_new_tokens":100, "seed": 42}}' \
+         -d '{"inputs":"![](https://tinyurl.com/48eathrw) What is this a picture of? Explain in detail.\n\n", "parameters": {"max_new_tokens":100, "seed": 42}}' \
          -H 'Content-Type: application/json'
     ```
 
     The above command will generate an output similar to the following:
 
-    ```
+    ```plaintext
     {"generated_text":"This image is a logo for the \"FM Benchmarking Tool.\" The logo is a blue hexagon with a green outline. The words \"FM Benchmarking Tool\" are written in white text in the center of the hexagon. Below the text is a bar graph with five bars, each a different shade of blue. A red line runs through the bars, starting at the first bar and ending at the fifth bar. The background of the image is white."}
     ```
 1. You can see traces from the serving container by running the following command:
@@ -88,7 +87,7 @@ Here are the steps to serve the [`meta-llama/Llama-3.2-11B-Vision-Instruct`](htt
   
     You should see an output similar to this:
 
-    ```
+    ```plaintext
     2024-11-03T14:51:27.393883Z  INFO generate{parameters=GenerateParameters { best_of: None, temperature: None, repetition_penalty: None, frequency_penalty: None, top_k: None, top_p: None, typical_p: None, do_sample: false, max_new_tokens: Some(100), return_full_text: None, stop: [], truncate: None, watermark: false, details: false, decoder_input_details: false, seed: Some(42), top_n_tokens: None, grammar: None, adapter_id: None } total_time="4.065504959s" validation_time="440.038965ms" queue_time="94.981µs" inference_time="3.625371193s" time_per_token="38.982485ms" seed="None"}: text_generation_router::server: router/src/server.rs:402: Success
     ```
 
