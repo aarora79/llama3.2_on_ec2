@@ -1,0 +1,16 @@
+services:
+  fmbench_model_container_1:
+    container_name: fmbench_model_container_1
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      NVIDIA_VISIBLE_DEVICES: 0
+      HF_MODEL_ID: meta-llama/Llama-3.2-11B-Vision-Instruct
+    image: 763104351884.dkr.ecr.us-east-1.amazonaws.com/huggingface-pytorch-tgi-inference:2.4.0-tgi2.3.1-gpu-py311-cu124-ubuntu22.04
+    ports:
+      - "8080:8080"
+    runtime: nvidia
+    shm_size: 12g
+    volumes:
+    - /tmp/hf_token.txt:/tmp/token:ro
