@@ -56,13 +56,15 @@ Here are the steps to serve the [`meta-llama/Llama-3.2-11B-Vision-Instruct`](htt
     curl 127.0.0.1:8080/generate \
         -X POST \
         -d '{ "inputs":"What is quantum gravity?", "parameters":{ "max_new_tokens":20 } }' \
-        -H 'Content-Type: application/json'
+        -H 'Content-Type: application/json' | jq
     ```
 
     The above command will generate an output similar to the following:
 
-    ```
-    {"generated_text":" Quantum gravity is a theoretical framework in physics that aims to merge quantum mechanics and general relativity. Quantum"}
+    ```{.bashrc}
+    {
+    "generated_text": " Quantum gravity is a theoretical framework in physics that aims to merge quantum mechanics and general relativity. Quantum"
+    }
     ```
 
     You can use the same endpoint for multi-modal inference as well. Here we ask the model to describe an image.
@@ -71,13 +73,15 @@ Here are the steps to serve the [`meta-llama/Llama-3.2-11B-Vision-Instruct`](htt
     curl -N 127.0.0.1:8080/generate \
          -X POST \
          -d '{"inputs":"![](https://tinyurl.com/48eathrw) What is this a picture of? Explain in detail.\n\n", "parameters": {"max_new_tokens":100, "seed": 42}}' \
-         -H 'Content-Type: application/json'
+         -H 'Content-Type: application/json' | jq
     ```
 
     The above command will generate an output similar to the following:
 
     ```plaintext
-    {"generated_text":"This image is a logo for the \"FM Benchmarking Tool.\" The logo is a blue hexagon with a green outline. The words \"FM Benchmarking Tool\" are written in white text in the center of the hexagon. Below the text is a bar graph with five bars, each a different shade of blue. A red line runs through the bars, starting at the first bar and ending at the fifth bar. The background of the image is white."}
+    {
+    "generated_text": "This image is a logo for the \"FM Benchmarking Tool.\" The logo is a blue hexagon with a green outline. The words \"FM Benchmarking Tool\" are written in white text in the center of the hexagon. Below the text is a bar graph with five bars, each a different shade of blue. A red line runs through the bars, starting at the first bar and ending at the fifth bar. The background of the image is white."
+    }
     ```
 1. You can see traces from the serving container by running the following command:
 
